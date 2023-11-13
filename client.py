@@ -15,7 +15,7 @@ def receive():
 def send(event=None):
     message = entry.get()
     client_socket.send(message.encode('utf-8'))
-    entry.delete(0, tk.END)  # Clear the entry field after sending
+    entry.delete(0, tk.END)  
     if message == "/quit":
         client_socket.close()
         root.destroy()
@@ -28,7 +28,7 @@ def on_closing(event=None):
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect(('127.0.0.1', 5555))
 
-# GUI setup
+
 root = tk.Tk()
 root.title("Simple Chat App")
 
@@ -44,7 +44,7 @@ send_button.pack(pady=5)
 
 root.protocol("WM_DELETE_WINDOW", on_closing)
 
-# Start a separate thread to handle receiving messages
+
 receive_thread = threading.Thread(target=receive)
 receive_thread.start()
 
